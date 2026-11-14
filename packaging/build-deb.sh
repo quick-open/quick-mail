@@ -227,6 +227,7 @@ EOF
 
 mkdir -p "$OUT"
 DEB="$OUT/${PKG}_${DEB_VERSION}_amd64.deb"
+chmod -R go-w "$STAGE"   # never ship group/other-writable files, whatever the source tree or umask was
 fakeroot dpkg-deb --build "$STAGE" "$DEB" >/dev/null 2>&1 \
   || dpkg-deb --build --root-owner-group "$STAGE" "$DEB" >/dev/null
 rm -rf "$STAGE"
