@@ -46,6 +46,12 @@ PAYLOAD="$WORK/unz/core"
 mkdir -p "$PAYLOAD/distribution"
 python3 -c "import json;json.load(open('$HERE/distribution/policies.json'))"  # gate: well-formed
 cp "$HERE/distribution/policies.json" "$HERE/distribution/distribution.ini" "$PAYLOAD/distribution/"
+# Quick OS 1.0.3 no-egress round: the SAME default prefs the Linux deb ships
+# (Remote Settings poll, connectivity/captive-portal checks, OpenH264/GMP,
+# region, health report, add-on cache, ISPDB e-mail all off). Thunderbird reads
+# <installdir>\defaults\pref\*.js on Windows too (channel-prefs.js lives there).
+[ -d "$PAYLOAD/defaults/pref" ] || { echo "!! no defaults/pref in the upstream payload" >&2; exit 1; }
+cp "$REPO/defaults/pref/quickmail-privacy.js" "$PAYLOAD/defaults/pref/quickmail-privacy.js"
 
 # our licences + notices ride INSIDE the install dir
 mkdir -p "$PAYLOAD/licenses"

@@ -81,6 +81,9 @@ rm -rf "$OPT/gtest" "$OPT/tests" "$OPT"/*.chk
 # Defaults, not locks; see the file's own header for the value semantics.
 install -m 0644 "$REPO/defaults/pref/quickmail-layout.js" \
         "$OPT/defaults/pref/quickmail-layout.js"
+# Quick OS 1.0.3: no automatic Mozilla network contact (see the file's header).
+install -m 0644 "$REPO/defaults/pref/quickmail-privacy.js" \
+        "$OPT/defaults/pref/quickmail-privacy.js"
 
 # ---------------------------------------------------- the Aura setup artwork
 # Swap upstream's octopus mascot illustration for our Aura envelope INSIDE
